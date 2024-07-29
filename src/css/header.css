@@ -1,0 +1,90 @@
+/* header.css */
+
+.navbar {
+    position: relative;
+    background-color: #ebf1ff;
+    color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px; /* Increased padding for better spacing */
+  }
+  
+  .navbar-logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333; /* Change the color of the logo */
+    text-decoration: none; /* Remove underline from the link */
+    cursor: pointer; /* Add pointer cursor on hover for better UX */
+  }
+  
+  .navbar-logo:hover {
+    color: #61dafb; /* Change color on hover */
+  }
+  
+  
+  .navbar-menu {
+    position: absolute;
+    top: 70px; /* Increased distance from top */
+    left: 0;
+    width: 100%;
+    background-color: #93b2fa;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .navbar-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar-links li {
+    margin-right: 25px; /* Increased margin between links */
+  }
+  
+  .navbar-links a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links a:hover {
+    color: #61dafb; /* Change text color on hover */
+  }
+  
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .bar {
+    width: 30px; /* Increased width of the bars */
+    height: 4px; /* Increased height of the bars */
+    background-color: rgb(0, 0, 0);
+    margin: 5px 0; /* Adjusted margin for spacing */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .menu-toggle.open .bar:nth-child(1) {
+    transform: translateY(10px) rotate(45deg); /* Adjusted positioning and rotation */
+  }
+  
+  .menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle.open .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg); /* Adjusted positioning and rotation */
+  }
+  
