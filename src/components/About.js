@@ -65,7 +65,7 @@ function About() {
           <div className="text">
             <h2>Background.</h2>
             <p>Growing up, I originally didn't know much about programming but still tried to keep up with the latest technologies. I started off with designing websites using Google Sites and moving different tabs around eventually leading to my first 'website', <span className="bold-text">FitTech Source.</span> </p>
-            <p>As I got older I started to try to learn about the coding side of things and started to familiarise myself with <span className="bold-text">HTML and CSS</span>. As I started getting more confident with this and making basic websites with CSS and HTML, I eventually started brushing up on my front end knowledge, learning Python and now in university, Java.</p>
+            <p>As I got older I started to try to learn about the coding side of things and started to familiarise myself with <span className="bold-text">HTML and CSS</span>. As I started getting more confident with this and making basic websites with CSS and HTML, I eventually started brushing up on my front end knowledge, learning Python and now in university, a multitude more including Java, C++ and Javascript</p>
             <p>Now with much more technologies and frameworks under my belt, I plan to use these to help in the real world, whether that be companies or clients from around the country.</p>
           </div>
           <div className="other-image">

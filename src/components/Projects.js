@@ -7,6 +7,20 @@ const projectsData = [
     description: 'I was part of a group which designed a fully functional web application for IBM SkillsBuild which allowed students to access leaderboard, enroll in courses, track their progress and more. I was fully responsible for the streaks feature and an avatar customization feature where users could create their own avatars and customize the features. Some technologies used were Java, Spring Boot, JavaScript, HTML, and CSS.',
     imageName: 'avatar4 - Copy.png'
   },
+
+  {
+    title: 'Unity Horror Game "Sinclairs secrets"',
+    description: (
+      <>
+        I was able to create my own Horror Game using Unity. The game is set in an abandoned asylum and the goal of the game is to escape. The main language I used was C# and this was one of my most enjoyable projects. You can find out more about it, including a demo video, on its GitHub page{' '}
+        <a href="https://github.com/miracleman14/Sinclair-Secrets-Game" target="_blank" rel="noopener noreferrer">
+          here
+        </a>.
+      </>
+    ),
+    imageName: 'Priest.jpg' // Change this line
+  },
+
   {
     title: 'FitTech Website made via Google Sites',
     description: 'This was my first actual website which I was able to create using Google Sites. I used this to write blogs about two things which I strongly enjoy, fitness and technology.',
@@ -17,11 +31,7 @@ const projectsData = [
     description: 'For this project, I wanted to explore much more about the User Interface/User Experience side of front-end development and created a high-fidelity prototype for a website about scavenger hunts in Cardiff. Some key technologies I used for this were HTML, CSS, and JavaScript.',
     imageName: 'Screenshot 2024-05-08 172922 - Copy.png'
   },
-  {
-    title: 'Unity Horror Game "Sinclairs secrets"',
-    description: 'I was able to create my own Horror Game using unity. the game is set in a abandoned asylum and the goal of the game is to escape. The main language I used to create this was C# and this did happen to be one of my most enjoyable projects.',
-    imageName: 'Priest.jpg' // Change this line
-  }
+  
 ];
 
 function Projects() {

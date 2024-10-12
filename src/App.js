@@ -37,7 +37,7 @@ function Home() {
       <div className="content">
         <div className="text">
           <h2>Hi, my name is <span className="bold-text">Miracle</span>.</h2>
-          <p>I'm a 3rd year <span className="bold-text">Computer Science MComp</span> undergraduate at the University of Leicester. From Front-End technologies to game development, if it involves development and problem solving <span className="bold-text">I want to be a part of it.</span></p>
+          <p>I'm a 3rd year <span className="bold-text">Computer Science MComp</span> undergraduate at the University of Leicester. From Front-End technologies to game development, if it involves technology and problem solving <span className="bold-text">I want to be a part of it.</span></p>
         </div>
         <div className="image-container">
           <img
