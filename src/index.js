@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom'; // Ensure you're using BrowserRouter
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/Personal-Website"> {/* Set your basename here */}
       <App />
     </Router>
   </React.StrictMode>

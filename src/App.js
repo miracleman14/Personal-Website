@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -50,4 +51,5 @@ function Home() {
   );
 }
 
+// Ensure you have the export statement here
 export default App;
