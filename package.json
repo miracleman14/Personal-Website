@@ -2,13 +2,12 @@
   "name": "your-project-name",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://miracleman14.github.io/Personal-Website/my-portfolio",
+  "homepage": "https://miracleman14.github.io/Personal-Website",
   "dependencies": {
-    "axios": "^1.7.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.23.1",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
     "web-vitals": "^4.2.2",
     "@emailjs/browser": "^4.3.3"
