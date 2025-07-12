@@ -1,38 +1,9 @@
 import React, { useState } from 'react';
-import '../css/projects.css'; // Import external CSS file for styling
+import { projectsData } from './projectsData';
+import '../css/projects.css'; // Import updated CSS file
 
-const projectsData = [
-  {
-    title: 'IBM SkillsBuild Gamified Web Application',
-    description: 'I was part of a group which designed a fully functional web application for IBM SkillsBuild which allowed students to access leaderboard, enroll in courses, track their progress and more. I was fully responsible for the streaks feature and an avatar customization feature where users could create their own avatars and customize the features. Some technologies used were Java, Spring Boot, JavaScript, HTML, and CSS.',
-    imageName: 'avatar4 - Copy.png'
-  },
-
-  {
-    title: 'Unity Horror Game "Sinclairs secrets"',
-    description: (
-      <>
-        I was able to create my own Horror Game using Unity. The game is set in an abandoned asylum and the goal of the game is to escape. The main language I used was C# and this was one of my most enjoyable projects. You can find out more about it, including a demo video, on its GitHub page{' '}
-        <a href="https://github.com/miracleman14/Sinclair-Secrets-Game" target="_blank" rel="noopener noreferrer">
-          here
-        </a>.
-      </>
-    ),
-    imageName: 'Priest.jpg' // Change this line
-  },
-
-  {
-    title: 'FitTech Website made via Google Sites',
-    description: 'This was my first actual website which I was able to create using Google Sites. I used this to write blogs about two things which I strongly enjoy, fitness and technology.',
-    imageName: 'Screenshot 2024-05-15 233525.png'
-  },
-  {
-    title: 'Cardiff Scavenger Hunt Website Prototype',
-    description: 'For this project, I wanted to explore much more about the User Interface/User Experience side of front-end development and created a high-fidelity prototype for a website about scavenger hunts in Cardiff. Some key technologies I used for this were HTML, CSS, and JavaScript.',
-    imageName: 'Screenshot 2024-05-08 172922 - Copy.png'
-  },
-  
-];
+// Optional: Import icons (e.g., using react-icons)
+// import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 function Projects() {
   const [expandedImage, setExpandedImage] = useState(null);
@@ -41,39 +12,161 @@ function Projects() {
     setExpandedImage(imageName);
   };
 
-  const handleCloseClick = () => {
-    setExpandedImage(null);
+  const handleCloseClick = (e) => {
+    // Prevent closing if clicking on the image itself within the modal
+    if (e.target === e.currentTarget) {
+       setExpandedImage(null);
+    }
+  };
+
+  // Function to stop modal close when clicking the modal content (image)
+  const handleModalContentClick = (e) => {
+    e.stopPropagation();
+  }
+
+  // MOSS project data
+  const mossProject = {
+    id: 'moss-solar-system',
+    title: 'Model of the Solar System (MOSS)',
+    description: 'A 3D solar system simulation built with Flask and React.js that models planetary orbits using real-time physics calculations. Features interactive controls, Newtonian mechanics, and real-world astronomical data from JPL.',
+    imageName: 'MOSS1.png', // Updated to match your actual image file name
+    technologies: ['Python', 'Flask', 'React.js', 'Three.js', 'Flask-SocketIO', 'WebSockets', 'Skyfield', 'JPL Horizons API', 'N-Body Simulation', 'Velocity Verlet Integration'],
+    githubUrl: 'https://github.com/miracleman14/Model-of-the-Solar-System-MOSS-',
+    liveUrl: null // Add this if you have a live demo deployed
   };
 
   return (
-    <section id="projects">
-      <h2>Notable Projects.</h2>
-      <div className="projects-container">
-        {projectsData.map((project, index) => (
-          <div className="project" key={index}>
-            <div className="project-content">
+    <section id="projects" className="projects-section">
+      <h2 className="section-title">Featured Projects</h2>
+      <div className="projects-grid">
+        {/* MOSS Project Card */}
+        <div className="project-card" key={mossProject.id}>
+          <div className="project-image-container">
+            <img
+              src={`${process.env.PUBLIC_URL}/img/${mossProject.imageName}`}
+              alt={`${mossProject.title} screenshot`}
+              className="project-image"
+              onClick={() => handleImageClick(mossProject.imageName)}
+              loading="lazy" // Add lazy loading for images
+            />
+            <div className="project-image-overlay" onClick={() => handleImageClick(mossProject.imageName)}>
+               View Larger
+            </div>
+          </div>
+          <div className="project-content">
+            <h3 className="project-title">{mossProject.title}</h3>
+            <p className="project-description">{mossProject.description}</p>
+
+            {mossProject.technologies && mossProject.technologies.length > 0 && (
+              <div className="project-technologies">
+                <h4 className="tech-title">Technologies Used:</h4>
+                <div className="tech-tags">
+                  {mossProject.technologies.map((tech, index) => (
+                    <span key={index} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="project-links">
+              {mossProject.githubUrl && (
+                <a
+                  href={mossProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link github-link"
+                  aria-label={`View source code for ${mossProject.title} on GitHub`}
+                >
+                  {/* Optional: <FaGithub /> */} GitHub
+                </a>
+              )}
+              {mossProject.liveUrl && (
+                <a
+                  href={mossProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link live-link"
+                   aria-label={`View live demo for ${mossProject.title}`}
+               >
+                  {/* Optional: <FaExternalLinkAlt /> */} Live Demo
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Existing projects from projectsData */}
+        {projectsData.map((project) => (
+          <div className="project-card" key={project.id}>
+            <div className="project-image-container">
               <img
                 src={`${process.env.PUBLIC_URL}/img/${project.imageName}`}
-                alt={project.title}
+                alt={`${project.title} screenshot`}
                 className="project-image"
                 onClick={() => handleImageClick(project.imageName)}
+                loading="lazy" // Add lazy loading for images
               />
-              <div className="project-details">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+              <div className="project-image-overlay" onClick={() => handleImageClick(project.imageName)}>
+                 View Larger
+              </div>
+            </div>
+            <div className="project-content">
+              <h3 className="project-title">{project.title}</h3>
+              <p className="project-description">{project.description}</p>
+
+              {project.technologies && project.technologies.length > 0 && (
+                <div className="project-technologies">
+                  <h4 className="tech-title">Technologies Used:</h4>
+                  <div className="tech-tags">
+                    {project.technologies.map((tech, index) => (
+                      <span key={index} className="tech-tag">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="project-links">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link github-link"
+                    aria-label={`View source code for ${project.title} on GitHub`}
+                  >
+                    {/* Optional: <FaGithub /> */} GitHub
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link live-link"
+                     aria-label={`View live demo for ${project.title}`}
+                 >
+                    {/* Optional: <FaExternalLinkAlt /> */} Live Demo
+                  </a>
+                )}
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Improved Modal */}
       {expandedImage && (
-        <div className="modal" onClick={handleCloseClick}>
-          <span className="close" onClick={handleCloseClick}>&times;</span>
-          <img
-            src={`${process.env.PUBLIC_URL}/img/${expandedImage}`}
-            alt="Expanded"
-            className="modal-content"
-          />
+        <div className="modal-backdrop" onClick={handleCloseClick}>
+           <div className="modal-content-wrapper" onClick={handleModalContentClick}>
+              <button className="modal-close-button" onClick={() => setExpandedImage(null)} aria-label="Close image viewer">
+                 ×
+               </button>
+              <img
+                src={`${process.env.PUBLIC_URL}/img/${expandedImage}`}
+                alt="Expanded project"
+                className="modal-image"
+              />
+           </div>
         </div>
       )}
     </section>

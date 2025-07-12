@@ -1,129 +1,338 @@
+/* --- CSS Variables --- */
+:root {
+  --primary-color: #4a69bd; /* A nice blue */
+  --secondary-color: #6a89cc;
+  --text-color-dark: #333;
+  --text-color-light: #555;
+  --text-color-inverted: #fff;
+  --background-light: #f0f4ff; /* Light blue/grey background */
+  --card-background: #ffffff;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-hover: rgba(0, 0, 0, 0.15);
+  --tag-background: #eef2f7;
+  --tag-text: #5a67d8; /* Indigo-like color for tags */
+  --link-hover-bg: #f5f5f5;
+
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+  --spacing-xlarge: 32px;
+
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
+/* --- General Styles --- */
 body {
-  background-color: #f0f4ff;
-  font-family: 'Arial', sans-serif;
+  background-color: var(--background-light);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+  color: var(--text-color-dark);
+  line-height: 1.6;
 }
 
-#projects {
-  margin-top: 80px;
-  margin-bottom: 40px;
-  font-size: 36px;
+/* --- Section Styles --- */
+.projects-section {
+  padding: var(--spacing-xlarge) var(--spacing-medium);
+  max-width: 1200px; /* Limit max width for better readability */
+  margin: 80px auto 40px auto; /* Keep top margin, add auto horizontal margins */
+}
+
+.section-title {
+  font-size: 2.5rem; /* Slightly larger, responsive units */
   text-align: center;
-  color: #333;
-  font-weight: bold;
+  color: var(--text-color-dark);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xlarge);
+  position: relative; /* For potential pseudo-element decoration */
 }
 
-.projects-container {
+/* Optional: Add an underline accent to the title */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    margin: var(--spacing-small) auto 0;
+    border-radius: 2px;
+}
+
+
+/* --- Grid Layout --- */
+.projects-grid {
+  display: grid;
+  /* Responsive columns: min 300px wide, max 1fr */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-large);
+  justify-content: center; /* Center items if they don't fill the row */
+}
+
+/* --- Project Card Styles --- */
+.project-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  overflow: hidden; /* Keep content contained */
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column; /* Stack image and content */
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
-.project {
-  width: 90%;
-  max-width: 800px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.project-card:hover {
+  transform: translateY(-5px); /* Subtle lift */
+  box-shadow: 0 8px 20px var(--shadow-color-hover);
+}
+
+/* --- Project Image --- */
+.project-image-container {
+  position: relative; /* For overlay positioning */
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 40px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  background-color: #fff;
-}
-
-.project:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.project-content {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+  cursor: pointer;
 }
 
 .project-image {
-  width: 40%;
-  height: auto;
-  border-right: 1px solid #ccc;
-  padding: 20px;
-  cursor: pointer;
-}
-
-.project-details {
-  flex: 1;
-  padding: 20px;
-}
-
-.project-details h3 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: #1a1a1a;
-}
-
-.project-details p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 0;
-  line-height: 1.5;
-}
-
-/* Modal styles */
-.modal {
-  display: flex;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.9);
+  object-fit: cover; /* Cover the area without distortion */
+  transition: transform var(--transition-speed) ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.project-image-overlay {
+  position: absolute;
+  inset: 0; /* Cover the entire container */
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--text-color-inverted);
+  display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity var(--transition-speed) ease;
+  pointer-events: none; /* Allow clicks to pass through unless hovered */
 }
 
-.modal-content {
-  max-width: 80%;
-  max-height: 80%;
+.project-image-container:hover .project-image-overlay {
+  opacity: 1;
+  pointer-events: auto; /* Make it clickable when visible */
 }
 
-.close {
+
+/* --- Project Content --- */
+.project-content {
+  padding: var(--spacing-large);
+  flex-grow: 1; /* Allow content to fill remaining space */
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-small);
+  color: var(--text-color-dark);
+  font-weight: 600;
+}
+
+.project-description {
+  font-size: 0.95rem;
+  color: var(--text-color-light);
+  margin-bottom: var(--spacing-medium);
+  flex-grow: 1; /* Push technologies/links to bottom */
+}
+
+/* --- Technologies / Tags --- */
+.project-technologies {
+  margin-bottom: var(--spacing-medium);
+}
+
+.tech-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color-dark);
+    margin-bottom: var(--spacing-small);
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+}
+
+.tech-tag {
+  background-color: var(--tag-background);
+  color: var(--tag-text);
+  padding: 4px var(--spacing-small);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* --- Project Links --- */
+.project-links {
+  display: flex;
+  gap: var(--spacing-medium);
+  margin-top: auto; /* Push links to the bottom */
+  padding-top: var(--spacing-medium); /* Add space above links */
+  border-top: 1px solid var(--border-color); /* Separator line */
+}
+
+.project-link {
+  display: inline-flex; /* Align icon and text if using icons */
+  align-items: center;
+  gap: var(--spacing-small); /* Space between icon and text */
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  border: 1px solid transparent;
+}
+
+.project-link.github-link {
+  color: #333; /* GitHub-like color */
+  border-color: #ccc;
+}
+.project-link.github-link:hover {
+   background-color: #f5f5f5;
+   color: #000;
+}
+
+
+.project-link.live-link {
+  background-color: var(--primary-color);
+  color: var(--text-color-inverted);
+}
+.project-link.live-link:hover {
+  background-color: var(--secondary-color);
+  color: var(--text-color-inverted);
+}
+
+/* --- Modal Styles --- */
+.modal-backdrop {
+  position: fixed;
+  z-index: 1000; /* Ensure it's on top */
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Darker backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-large);
+  cursor: pointer; /* Indicate backdrop is clickable to close */
+  animation: fadeIn 0.3s ease; /* Fade in animation */
+}
+
+.modal-content-wrapper {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    cursor: default; /* Don't show close cursor on the content itself */
+    animation: scaleUp 0.3s ease; /* Scale up animation */
+}
+
+.modal-image {
+  display: block; /* Remove extra space below image */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensure whole image is visible */
+  border-radius: 4px; /* Slight rounding */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close-button {
   position: absolute;
-  top: 20px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
+  top: -10px; /* Position slightly outside */
+  right: -10px;
+  background-color: var(--text-color-dark);
+  color: var(--text-color-inverted);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  line-height: 35px; /* Center the 'x' */
+  text-align: center;
   cursor: pointer;
+  z-index: 1001; /* Above the image */
+  transition: background-color var(--transition-speed) ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Media query for smaller screens */
+.modal-close-button:hover {
+  background-color: #555;
+}
+
+
+/* Keyframe animations for modal */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+/* --- Media Queries for Responsiveness --- */
 @media (max-width: 768px) {
-  .project {
-    width: 100%;
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .projects-grid {
+    /* Stack to single column on smaller screens */
+    grid-template-columns: 1fr;
+    gap: var(--spacing-large);
   }
 
   .project-content {
-    flex-direction: column;
+    padding: var(--spacing-medium);
   }
 
-  .project-image {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #ccc;
-    padding: 20px 0;
+  .project-title {
+      font-size: 1.3rem;
+  }
+  .project-description {
+      font-size: 0.9rem;
+  }
+  .project-links {
+      flex-direction: column; /* Stack links vertically */
+      align-items: flex-start; /* Align links to the start */
+      gap: var(--spacing-medium);
+  }
+  .project-link {
+      width: 100%; /* Make links full width */
+      text-align: center; /* Center text in links */
+      justify-content: center; /* Center icon/text */
   }
 
-  .project-details {
-    padding: 20px;
+  .modal-content-wrapper {
+      max-width: 95%;
+      max-height: 85%;
   }
+  .modal-close-button {
+      top: 5px;
+      right: 5px;
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      line-height: 30px;
+  }
+}
 
-  .project-details h3 {
-    font-size: 24px;
-  }
-
-  .project-details p {
-    font-size: 14px;
-  }
+@media (max-width: 480px) {
+    .section-title {
+      font-size: 1.8rem;
+    }
+    /* Further adjustments for very small screens if needed */
 }

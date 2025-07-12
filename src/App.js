@@ -1,55 +1,49 @@
 // App.js
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.css'; // Main CSS file
+
+// Import Components
 import Header from './components/Header';
+import Home from './components/Home'; // Import the new Home component
 import About from './components/About';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-import Messages from './components/Messages';
+import Messages from './components/Messages'; // Assuming this is for an admin view or similar
 
 function App() {
+  // State for messages (if needed across app, otherwise could be localized in Contact/Messages)
   const [messages, setMessages] = useState([]);
 
   const addMessage = (newMessage) => {
-    setMessages([...messages, newMessage]);
+    setMessages(prevMessages => [...prevMessages, newMessage]); // Use functional update
   };
 
   return (
-    <div className="App">
+    // Using a fragment <> or a div with a more general App container class is fine
+    <>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact addMessage={addMessage} />} />
-        <Route path="/messages" element={<Messages messages={messages} />} />
-      </Routes>
+      {/* Main content area could have padding to prevent overlap with fixed Header/Footer if needed */}
+      <main className="main-content">
+        <Routes>
+          {/* Use element prop correctly */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          {/* Pass addMessage function to Contact */}
+          <Route path="/contact" element={<Contact addMessage={addMessage} />} />
+          {/* Pass messages array to Messages */}
+          <Route path="/messages" element={<Messages messages={messages} />} />
+          {/* Consider adding a 404 Not Found route */}
+          {/* <Route path="*" element={<NotFound />} /> */}
+        </Routes>
+      </main>
       <Footer />
-    </div>
+    </> // Use React.Fragment shorthand
   );
 }
 
-function Home() {
-  return (
-    <section className="App-header">
-      <div className="content">
-        <div className="text">
-          <h2>Hi, my name is <span className="bold-text">Miracle</span>.</h2>
-          <p>I'm a 3rd year <span className="bold-text">Computer Science MComp</span> undergraduate at the University of Leicester. From Front-End technologies to game development, if it involves technology and problem solving <span className="bold-text">I want to be a part of it.</span></p>
-        </div>
-        <div className="image-container">
-          <img
-            src={`${process.env.PUBLIC_URL}/img/Me - Copy - Copy.jpg`}
-            alt="Miracle - Computer Science Student"
-            className="profile-image"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
+// Home component is now in its own file, so it's removed from here.
 
-// Ensure you have the export statement here
 export default App;

@@ -1,90 +1,206 @@
 /* header.css */
 
+/* Assumes variables like --primary-color, --background-section, --text-dark, etc. exist */
+/* Import variables if they are in another file: @import 'variables.css'; */
+
 .navbar {
-    position: relative;
-    background-color: #ebf1ff;
-    color: rgb(0, 0, 0);
-    display: flex;
-    justify-content: space-between;
+  /* Sticky header */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays on top */
+
+  background-color: var(--background-section, #ffffff); /* White background */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  padding: 0 var(--spacing-md); /* Use variable for padding */
+  transition: background-color var(--transition-speed) ease; /* Smooth transition if bg changes */
+}
+
+/* Container to constrain content width */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--container-max-width, 1140px); /* Use global max-width */
+  margin: 0 auto; /* Center the container */
+  height: 65px; /* Fixed height for consistency */
+}
+
+.navbar-logo {
+  font-size: 1.75rem; /* Slightly adjusted size */
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--text-dark, #333);
+  text-decoration: none;
+  padding: var(--spacing-sm) 0; /* Padding for click area */
+  transition: color var(--transition-speed) ease;
+}
+
+.navbar-logo:hover,
+.navbar-logo:focus {
+  color: var(--primary-color, #4a69bd); /* Use primary color on hover/focus */
+}
+
+/* --- Menu Toggle Button (Mobile) --- */
+.menu-toggle {
+  display: none; /* Hidden by default, shown in media query */
+  background: none;
+  border: none;
+  padding: var(--spacing-sm); /* Clickable area */
+  cursor: pointer;
+  z-index: 1001; /* Above the menu */
+}
+
+.bar {
+  display: block; /* Ensure bars are block elements */
+  width: 28px; /* Adjusted size */
+  height: 3px; /* Adjusted size */
+  background-color: var(--text-dark, #333);
+  margin: 5px 0;
+  border-radius: 3px;
+  transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease, background-color var(--transition-speed) ease;
+}
+
+/* Hamburger to X animation */
+.menu-toggle.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Navigation Menu --- */
+.navbar-menu {
+  /* Styles for desktop view are handled in media query */
+}
+
+.navbar-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Horizontal layout for desktop */
+  align-items: center;
+  height: 100%; /* Take full height of navbar */
+}
+
+.navbar-links li {
+  margin-left: var(--spacing-lg, 24px); /* Spacing between desktop links */
+}
+
+.nav-link { /* Use this class from NavLink */
+  color: var(--text-medium, #555);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold, 600);
+  padding: var(--spacing-md) var(--spacing-sm); /* Padding for click area */
+  display: block; /* Make it a block for padding */
+  position: relative; /* For pseudo-element underline */
+  transition: color var(--transition-speed) ease;
+}
+
+/* Underline effect for hover/focus/active */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 10px; /* Adjust position */
+  left: var(--spacing-sm);
+  right: var(--spacing-sm);
+  height: 2px;
+  background-color: var(--primary-color, #4a69bd);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition-speed) ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--text-dark, #333);
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* Active link specific style */
+.nav-link.active {
+  color: var(--primary-color, #4a69bd); /* Highlight active link */
+}
+
+
+/* --- Mobile Navigation Styles --- */
+@media (max-width: 768px) {
+  .navbar-container {
+    height: 60px; /* Slightly smaller height on mobile */
+  }
+
+  .menu-toggle {
+    display: flex; /* Show hamburger on mobile */
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 15px 30px; /* Increased padding for better spacing */
   }
-  
-  .navbar-logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333; /* Change the color of the logo */
-    text-decoration: none; /* Remove underline from the link */
-    cursor: pointer; /* Add pointer cursor on hover for better UX */
-  }
-  
-  .navbar-logo:hover {
-    color: #61dafb; /* Change color on hover */
-  }
-  
-  
+
   .navbar-menu {
     position: absolute;
-    top: 70px; /* Increased distance from top */
+    top: 100%; /* Position below the header */
     left: 0;
     width: 100%;
-    background-color: #93b2fa;
-    display: flex;
-    justify-content: center;
+    background-color: var(--background-section, #ffffff); /* Same background as header */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+    border-top: 1px solid var(--border-color, #eee); /* Separator line */
+
+    /* Slide down animation */
+    transform: translateY(-10px); /* Start slightly up */
     opacity: 0;
+    visibility: hidden; /* Use visibility for better performance/accessibility */
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: transform var(--transition-speed) ease, opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
+    /* Delay visibility transition */
+    transition-property: transform, opacity, visibility;
   }
-  
+
   .navbar-menu.open {
+    transform: translateY(0);
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
-  
+
   .navbar-links {
-    list-style: none;
-    padding: 0;
-    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    width: 100%;
+    height: auto; /* Auto height for column */
+    padding: var(--spacing-md) 0; /* Padding top/bottom */
   }
-  
+
   .navbar-links li {
-    margin-right: 25px; /* Increased margin between links */
+    margin-left: 0; /* Remove left margin */
+    width: 100%; /* Full width list items */
   }
-  
-  .navbar-links a {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+
+  .nav-link {
+    padding: var(--spacing-md) var(--spacing-lg); /* More padding for easier tapping */
+    text-align: center; /* Center text */
+    width: 100%; /* Ensure link takes full width */
+    border-bottom: 1px solid var(--border-color, #eee); /* Separator lines */
   }
-  
-  .navbar-links a:hover {
-    color: #61dafb; /* Change text color on hover */
+
+  .navbar-links li:last-child .nav-link {
+    border-bottom: none; /* Remove border from last item */
   }
-  
-  .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-  }
-  
-  .bar {
-    width: 30px; /* Increased width of the bars */
-    height: 4px; /* Increased height of the bars */
-    background-color: rgb(0, 0, 0);
-    margin: 5px 0; /* Adjusted margin for spacing */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-  
-  .menu-toggle.open .bar:nth-child(1) {
-    transform: translateY(10px) rotate(45deg); /* Adjusted positioning and rotation */
-  }
-  
-  .menu-toggle.open .bar:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .menu-toggle.open .bar:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg); /* Adjusted positioning and rotation */
-  }
-  
+
+  /* Remove underline effect on mobile if desired */
+   .nav-link::after {
+     display: none;
+   }
+
+  /* Change active style for mobile */
+   .nav-link.active {
+     background-color: rgba(74, 105, 189, 0.05); /* Subtle background for active mobile link */
+     color: var(--primary-color, #4a69bd);
+   }
+}

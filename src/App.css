@@ -1,129 +1,217 @@
 /* App.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap');
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+/* --- CSS Variables --- */
+:root {
+  /* Colors */
+  --primary-color: #4a69bd; /* Example: A professional blue */
+  --secondary-color: #6a89cc;
+  --background-light: #f8f9fa; /* Lighter, cleaner background */
+  --background-section: #ffffff; /* White for sections like hero */
+  --text-dark: #212529;       /* Darker text for better contrast */
+  --text-medium: #495057;     /* Medium grey for paragraphs */
+  --text-light: #6c757d;      /* Lighter grey */
+  --border-color: #dee2e6;
+  --highlight-bg: rgba(74, 105, 189, 0.1); /* Subtle background for highlighted text */
+  --image-border-color: var(--primary-color); /* Use primary color for image border */
+  --shadow-color: rgba(0, 0, 0, 0.1);
 
-/* General styles */
+  /* Typography */
+  --font-family-base: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* Modern font */
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+
+  /* Misc */
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+  --container-max-width: 1140px; /* Max width for content */
+}
+
+/* --- General Styles --- */
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-family-base);
   margin: 0;
   padding: 0;
-  background-color: #f0f2f5;
-  color: #333;
-  line-height: 1.6;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  line-height: 1.7; /* Slightly increased line-height for readability */
+  -webkit-font-smoothing: antialiased; /* Smoother fonts on Mac */
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
-  text-align: center;
+/* Style the main container if needed (e.g., for padding below header) */
+.main-content {
+  /* Example: Add padding if your header is fixed */
+  /* padding-top: 80px; */
 }
 
-.App-header {
-  background-color: #ebf1ff;
-  min-height: 100vh;
+/* --- Hero Section (Home Page) --- */
+.hero-section {
+  background-color: var(--background-section); /* Use variable */
+  min-height: calc(100vh - 60px); /* Adjust 60px based on your actual Header height, ensures it fills screen below header */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  padding: 20px;
-  margin-top: -40px; /* Move everything up by approximately one line */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+  padding: var(--spacing-xxl) var(--spacing-lg);
+  overflow: hidden; /* Prevent potential overflow issues */
+  /* Remove the negative margin hack */
 }
 
-h2 {
-  font-size: 4rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-p {
-  font-size: 2.2rem;
-  max-width: 800px;
-  margin: 0 auto 20px;
-  color: #555;
-}
-
-.bold-text {
-  font-weight: 700;
-}
-
-.App-link {
-  color: #61dafb;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.App-link:hover {
-  color: #21a1f1;
-}
-
-/* Circular profile image */
-.profile-image {
-  max-width: 200px;
-  height: auto;
-  border-radius: 50%;
-  border: 2px solid #61dafb;
-  margin-top: 10px; /* Adjust margin-top for smaller spacing */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Add smooth transitions */
-img, .App-link {
-  transition: transform 0.3s ease;
-}
-
-img:hover {
-  transform: scale(1.05);
-}
-
-.App-link:hover {
-  transform: translateY(-2px);
-}
-
-.content {
+.hero-content {
   display: flex;
-  justify-content: center;
+  flex-direction: row; /* Text on left, image on right by default */
   align-items: center;
+  justify-content: space-between; /* Space out text and image */
+  gap: var(--spacing-xl); /* Gap between text and image */
+  max-width: var(--container-max-width);
+  width: 100%;
+  /* Add entry animation */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
 }
 
-.text {
-  flex: 1;
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-text {
+  flex: 1 1 55%; /* Allow text to take slightly more space */
   text-align: left;
 }
 
-.image-container {
-  flex: 1;
-  text-align: right;
+.hero-image-container {
+  flex: 1 1 40%; /* Image takes slightly less space */
+  text-align: center; /* Center image within its container */
+  /* Add subtle animation delay for image */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s 0.2s ease forwards; /* Delay animation */
 }
 
+/* Headings & Paragraphs specific to Hero */
+.hero-section h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.hero-section p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem); /* Responsive font size */
+  max-width: 650px; /* Keep paragraph readable */
+  margin-bottom: 0; /* Remove default bottom margin if not needed */
+  color: var(--text-medium);
+}
+
+.highlight-text {
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary-color); /* Use primary color for emphasis */
+  /* Optional: add subtle background */
+  /* background-color: var(--highlight-bg); */
+  /* padding: 0 var(--spacing-xs); */
+}
+
+/* Profile Image */
 .profile-image {
-  width: 70%; /* Adjust the width as needed */
-  max-width: 400px; /* Set a maximum width for larger screens */
+  /* Consolidate all profile image styles here */
+  display: inline-block; /* Allows centering via text-align on parent */
+  width: clamp(180px, 40vw, 320px); /* Responsive width */
   height: auto; /* Maintain aspect ratio */
+  aspect-ratio: 1 / 1; /* Ensure it's perfectly round */
+  object-fit: cover; /* Prevent distortion */
   border-radius: 50%;
-  border: 4px solid #61dafb; /* Increase border size for emphasis */
-  margin-top: 30px; /* Reduce top margin for spacing */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance box shadow for depth */
+  border: 4px solid var(--image-border-color);
+  box-shadow: 0 8px 25px var(--shadow-color); /* Softer shadow */
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
-/* Media query for smaller screens */
+.profile-image:hover {
+  transform: scale(1.03) rotate(2deg); /* Subtle hover effect */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Call to Action Links (Example) */
+.cta-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.cta-link:hover {
+  border-color: var(--primary-color);
+}
+
+/* --- Media Queries --- */
 @media (max-width: 768px) {
-  .App-header {
-    padding: 60px 10px; /* Reduce padding for smaller screens */
+  .hero-section {
+    min-height: calc(100vh - 50px); /* Adjust for potentially smaller header */
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center; /* Center text on mobile */
   }
 
-  h2 {
-    font-size: 3rem; /* Decrease font size for smaller screens */
+  .hero-content {
+    flex-direction: column; /* Stack text and image */
+    gap: var(--spacing-xl);
   }
 
-  p {
-    font-size: 1.8rem; /* Decrease font size for smaller screens */
+  .hero-text {
+    flex-basis: auto; /* Reset flex basis */
+    text-align: center; /* Center text block */
+    order: 2; /* Put text below image */
+  }
+
+  .hero-image-container {
+    flex-basis: auto;
+    order: 1; /* Put image above text */
+    width: 60%; /* Adjust image container width */
+    margin: 0 auto; /* Center the container */
+    animation-delay: 0s; /* Remove animation delay on mobile if preferred */
   }
 
   .profile-image {
-    width: 80%; /* Adjust image width for smaller screens */
-    max-width: 300px; /* Adjust max-width for smaller screens */
-    margin-top: 20px; /* Adjust top margin for smaller screens */
+     width: 100%; /* Image fills its container */
+     max-width: 250px; /* Limit max size on mobile */
   }
+
+  .hero-section h1 {
+      /* Adjusted clamp for mobile */
+      font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .hero-section p {
+       /* Adjusted clamp for mobile */
+      font-size: clamp(1rem, 4vw, 1.1rem);
+      max-width: 100%; /* Allow paragraph to take full width */
+  }
+}
+
+/* --- Other Global Styles (Links, Buttons, etc. if needed) --- */
+/* Example: General link styling */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
 }
