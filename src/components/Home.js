@@ -24,7 +24,7 @@ function Home() {
             src={`${process.env.PUBLIC_URL}/img/LinkedinProfile.jpg`} 
             alt="Miracle - Computer Science Student"
             className="profile-image"
-            loading="lazy" // Add lazy loading
+            loading="lazy" // lazy loading
           />
         </div>
       </div>
