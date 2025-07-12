@@ -8,7 +8,7 @@ function Home() {
     <section className="hero-section" id="home">
       <div className="hero-content">
         <div className="hero-text">
-          {/* Consider using h1 for the main page heading for SEO */}
+          {/* Consider using h1 for the main page heading for SEO */} 
           <h1>Hi, my name is <span className="highlight-text">Miracle</span>.</h1>
           <p>
             I'm a 3rd year <span className="highlight-text">Computer Science MComp</span> undergraduate
