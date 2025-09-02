@@ -52,8 +52,7 @@ body {
 
 /* Style the main container if needed (e.g., for padding below header) */
 .main-content {
-  /* Example: Add padding if your header is fixed */
-  /* padding-top: 80px; */
+  min-height: 100vh; /* Ensure full height for better mobile experience */
 }
 
 /* --- Hero Section (Home Page) --- */
@@ -161,6 +160,10 @@ body {
 
 /* --- Media Queries --- */
 @media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
   .hero-section {
     min-height: calc(100vh - 50px); /* Adjust for potentially smaller header */
     padding: var(--spacing-xl) var(--spacing-md);
@@ -200,6 +203,57 @@ body {
        /* Adjusted clamp for mobile */
       font-size: clamp(1rem, 4vw, 1.1rem);
       max-width: 100%; /* Allow paragraph to take full width */
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  :root {
+    --spacing-md: 12px;
+    --spacing-lg: 20px;
+    --spacing-xl: 24px;
+  }
+
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .hero-section {
+    padding: var(--spacing-lg) var(--spacing-md);
+    min-height: calc(100vh - 40px);
+  }
+
+  .hero-section h1 {
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  }
+
+  .hero-section p {
+    font-size: clamp(0.95rem, 5vw, 1.1rem);
+  }
+
+  .hero-image-container {
+    width: 70%;
+  }
+
+  .profile-image {
+    max-width: 200px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  a:hover {
+    text-decoration: none;
+  }
+
+  .filter-btn:hover {
+    transform: none;
+  }
+
+  .project-card:hover {
+    transform: none;
   }
 }
 

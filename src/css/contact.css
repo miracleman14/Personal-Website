@@ -100,23 +100,39 @@ button:hover {
 /* Media query for smaller screens */
 @media (max-width: 768px) {
     .contact-container {
-        padding: 40px; /* Reduce padding for smaller screens */
+        padding: 40px var(--spacing-md, 16px); /* Reduce padding for smaller screens */
+    }
+
+    .contact-form {
+        max-width: 100%;
+        padding: var(--spacing-lg, 24px);
     }
 
     label {
         font-size: 16px; /* Decrease font size for smaller screens */
+        display: block;
+        margin-bottom: 8px;
     }
 
     input[type="text"],
     input[type="email"],
     textarea {
         padding: 12px; /* Adjust padding for smaller screens */
-        font-size: 14px; /* Decrease font size for smaller screens */
+        font-size: 16px; /* Prevent zoom on iOS */
+        width: 100%;
+        box-sizing: border-box;
     }
 
     button {
         padding: 12px 20px; /* Adjust padding for smaller screens */
-        font-size: 14px; /* Decrease font size for smaller screens */
+        font-size: 16px; /* Prevent zoom on iOS */
+        width: 100%;
+        min-height: 44px; /* Touch-friendly */
+    }
+
+    .social-links {
+        justify-content: center;
+        margin-top: var(--spacing-xl, 32px);
     }
 
     .social-links img {
@@ -125,7 +141,7 @@ button:hover {
     }
 
     .social-links a {
-        margin: 0 8px; /* Adjust spacing between links */
+        margin: 0 12px; /* Adjust spacing between links */
     }
 
     .success-message {
@@ -133,5 +149,26 @@ button:hover {
         right: 10px;
         font-size: 14px;
         padding: 10px;
+        max-width: calc(100vw - 20px);
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .contact-container {
+        padding: 30px var(--spacing-sm, 8px);
+    }
+
+    .contact-form {
+        padding: var(--spacing-md, 16px);
+    }
+
+    .social-links a {
+        margin: 0 8px;
+    }
+
+    .social-links img {
+        width: 36px;
+        height: 36px;
     }
 }

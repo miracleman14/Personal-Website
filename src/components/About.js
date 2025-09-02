@@ -52,8 +52,8 @@ function About() {
           </div>
           <div className="other-image">
             <img
-              src={`${process.env.PUBLIC_URL}/img/Leicester1.jpg`}
-              alt="Leicester"
+              src={`${process.env.PUBLIC_URL}/img/MiracleCartoon.png`}
+              alt="Miracle Cartoon"
               className="other-image"
             />
           </div>
@@ -63,7 +63,7 @@ function About() {
       <section id="background" className="about-section">
         <div className="content">
           <div className="text">
-            <h2>Background.</h2>
+            <h2>Background<span className="bold-text">.</span></h2>
             <p>Growing up, I originally didn't know much about programming but still tried to keep up with the latest technologies. I started off with designing websites using Google Sites and moving different tabs around eventually leading to my first 'website', <span className="bold-text">FitTech Source.</span> </p>
             <p>As I got older I started to try to learn about the coding side of things and started to familiarise myself with <span className="bold-text">HTML and CSS</span>. As I started getting more confident with this and making basic websites with CSS and HTML, I eventually started brushing up on my front end knowledge, learning Python and now in university, a multitude more including Java, C++ and Javascript</p>
             <p>Now with much more technologies and frameworks under my belt, I plan to use these to help in the real world, whether that be companies or clients from around the country.</p>
@@ -78,10 +78,55 @@ function About() {
         </div>
       </section>
 
+      <section id="skills" className="about-section">
+        <div className="content">
+          <div className="text">
+            <h2>Skills & Technologies<span className="bold-text">.</span></h2>
+            <p>I’ve picked up skills across different areas of development, from front-end to back-end, and like turning them into simple, effective solutions.</p>
+            <div className="skills-grid">
+              <div className="skill-category">
+                <h3>Frontend</h3>
+                <ul>
+                  <li>React.js</li>
+                  <li>JavaScript (ES6+)</li>
+                  <li>HTML5 & CSS3</li>
+                  <li>Three.js</li>
+                </ul>
+              </div>
+              <div className="skill-category">
+                <h3>Backend</h3>
+                <ul>
+                  <li>Python</li>
+                  <li>Flask</li>
+                  <li>Node.js</li>
+                  <li>Java</li>
+                </ul>
+              </div>
+              <div className="skill-category">
+                <h3>Tools & Others</h3>
+                <ul>
+                  <li>Git & GitHub</li>
+                  <li>VS Code</li>
+                  <li>C++</li>
+                  <li>WebSockets</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="other-image">
+            <img
+              src={`${process.env.PUBLIC_URL}/img/git.png`}
+              alt="Git Logo"
+              className="other-image"
+            />
+          </div>
+        </div>
+      </section>
+
       <section id="interests" className="about-section">
         <div className="content">
           <div className="text">
-            <h2>Interests.</h2>
+            <h2>Interests<span className="bold-text">.</span></h2>
             <p>Beyond my computing adventures, I have a love for gaming. I use it as a way to detox and a break from the real world, while also viewing it as an art.</p>
             <p>Away from my laptop, I am a huge basketball fan and love to keep up with my favorite team, the Milwaukee Bucks, and hope to one day see the team live.</p>
           </div>

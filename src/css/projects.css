@@ -47,6 +47,48 @@ body {
   position: relative; /* For potential pseudo-element decoration */
 }
 
+/* Filter Styles */
+.filter-container {
+  text-align: center;
+  margin-bottom: var(--spacing-xlarge);
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-small);
+  margin-top: var(--spacing-medium);
+}
+
+.filter-btn {
+  background-color: var(--card-background);
+  border: 2px solid var(--border-color);
+  color: var(--text-color-light);
+  padding: 8px var(--spacing-medium);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+  min-height: 44px; /* Ensure touch-friendly size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-btn:hover {
+  background-color: var(--primary-color);
+  color: var(--text-color-inverted);
+  border-color: var(--primary-color);
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: var(--text-color-inverted);
+  border-color: var(--primary-color);
+}
+
 /* Optional: Add an underline accent to the title */
 .section-title::after {
     content: '';
@@ -285,8 +327,25 @@ body {
 
 /* --- Media Queries for Responsiveness --- */
 @media (max-width: 768px) {
+  .projects-section {
+    padding: var(--spacing-large) var(--spacing-medium);
+  }
+
   .section-title {
     font-size: 2rem;
+  }
+
+  .filter-buttons {
+    gap: var(--spacing-small);
+    justify-content: center;
+  }
+
+  .filter-btn {
+    padding: 10px var(--spacing-small);
+    font-size: 0.85rem;
+    min-width: 80px;
+    flex: 1 1 auto;
+    max-width: 120px;
   }
 
   .projects-grid {
@@ -314,6 +373,7 @@ body {
       width: 100%; /* Make links full width */
       text-align: center; /* Center text in links */
       justify-content: center; /* Center icon/text */
+      min-height: 44px; /* Touch-friendly */
   }
 
   .modal-content-wrapper {
@@ -323,16 +383,65 @@ body {
   .modal-close-button {
       top: 5px;
       right: 5px;
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       font-size: 20px;
-      line-height: 30px;
+      line-height: 35px;
   }
 }
 
 @media (max-width: 480px) {
+    .projects-section {
+      padding: var(--spacing-medium) var(--spacing-small);
+    }
+
     .section-title {
       font-size: 1.8rem;
+      margin-bottom: var(--spacing-large);
     }
-    /* Further adjustments for very small screens if needed */
+
+    .filter-container {
+      margin-bottom: var(--spacing-large);
+    }
+
+    .filter-buttons {
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 8px 6px;
+      font-size: 0.8rem;
+      min-width: 70px;
+      max-width: 100px;
+    }
+
+    .project-card {
+      margin: 0 var(--spacing-small);
+    }
+
+    .project-content {
+      padding: var(--spacing-small);
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+    }
+
+    .project-description {
+      font-size: 0.85rem;
+    }
+
+    .tech-tags {
+      gap: 6px;
+    }
+
+    .tech-tag {
+      font-size: 0.75rem;
+      padding: 3px 6px;
+    }
+
+    .modal-content-wrapper {
+      max-width: 98%;
+      max-height: 90%;
+    }
 }

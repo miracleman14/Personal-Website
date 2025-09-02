@@ -73,10 +73,6 @@
 }
 
 /* --- Navigation Menu --- */
-.navbar-menu {
-  /* Styles for desktop view are handled in media query */
-}
-
 .navbar-links {
   list-style: none;
   padding: 0;
@@ -120,14 +116,20 @@
 }
 
 .nav-link:hover::after,
-.nav-link:focus::after,
-.nav-link.active::after {
+.nav-link:focus::after {
   transform: scaleX(1);
 }
 
-/* Active link specific style */
+/* Active link specific style - remove underline for active to prevent double */
 .nav-link.active {
   color: var(--primary-color, #4a69bd); /* Highlight active link */
+  text-decoration: underline; /* Add simple underline for active */
+}
+
+.nav-link.active::after,
+.nav-link.active:hover::after,
+.nav-link.active:focus::after {
+  display: none; /* Hide the pseudo underline for active links even on hover */
 }
 
 
@@ -187,6 +189,10 @@
     text-align: center; /* Center text */
     width: 100%; /* Ensure link takes full width */
     border-bottom: 1px solid var(--border-color, #eee); /* Separator lines */
+    min-height: 44px; /* Touch-friendly size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .navbar-links li:last-child .nav-link {
