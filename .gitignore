@@ -18,6 +18,9 @@
 .env.test.local
 .env.production.local
 
+# gh-pages cache
+node_modules/.cache/gh-pages/
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
