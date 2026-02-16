@@ -1,28 +1,26 @@
-/* App.css */
+/* ═══════════════════════════════════════════════════
+   APP.CSS — Global RPG Theme + Home Page
+   ═══════════════════════════════════════════════════
+   Shares the same palette & font tokens as about.css
+   so the entire site feels like one RPG interface.
+   ═══════════════════════════════════════════════════ */
 
-/* --- Google Font Import --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* ── Fonts (same as about.css) ── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
-/* --- CSS Variables --- */
+/* ── Shared Variables ── */
 :root {
-  /* Colors */
-  --primary-color: #4a69bd; /* Example: A professional blue */
-  --secondary-color: #6a89cc;
-  --background-light: #f8f9fa; /* Lighter, cleaner background */
-  --background-section: #ffffff; /* White for sections like hero */
-  --text-dark: #212529;       /* Darker text for better contrast */
-  --text-medium: #495057;     /* Medium grey for paragraphs */
-  --text-light: #6c757d;      /* Lighter grey */
-  --border-color: #dee2e6;
-  --highlight-bg: rgba(74, 105, 189, 0.1); /* Subtle background for highlighted text */
-  --image-border-color: var(--primary-color); /* Use primary color for image border */
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  /* RPG palette — identical to about.css */
+  --rpg-bg: #0e0e1a;
+  --rpg-panel: #16162a;
+  --rpg-gold: #c8a84e;
+  --rpg-gold-dim: #8a7230;
+  --rpg-text: #d4d0c8;
+  --rpg-muted: #8a8878;
 
-  /* Typography */
-  --font-family-base: 'Inter', 'Helvetica Neue', Arial, sans-serif; /* Modern font */
-  --font-weight-normal: 400;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
+  /* Fonts */
+  --rpg-font-heading: 'Cinzel', serif;
+  --rpg-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Spacing */
   --spacing-xs: 4px;
@@ -32,53 +30,152 @@
   --spacing-xl: 32px;
   --spacing-xxl: 48px;
 
-  /* Misc */
-  --border-radius: 8px;
+  /* Layout */
+  --container-max-width: 1140px;
   --transition-speed: 0.3s;
-  --container-max-width: 1140px; /* Max width for content */
 }
 
-/* --- General Styles --- */
+/* ── Reset & Global ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: var(--font-family-base);
+  font-family: var(--rpg-font-body);
   margin: 0;
   padding: 0;
-  background-color: var(--background-light);
-  color: var(--text-dark);
-  line-height: 1.7; /* Slightly increased line-height for readability */
-  -webkit-font-smoothing: antialiased; /* Smoother fonts on Mac */
+  background-color: var(--rpg-bg);
+  color: var(--rpg-text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Style the main container if needed (e.g., for padding below header) */
 .main-content {
-  min-height: 100vh; /* Ensure full height for better mobile experience */
+  min-height: 100vh;
 }
 
-/* --- Hero Section (Home Page) --- */
+/* Gold accent class — reusable anywhere */
+.gold {
+  color: var(--rpg-gold);
+  font-weight: 600;
+}
+
+/* Global link styles (RPG-ified) */
+a {
+  color: var(--rpg-gold);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--rpg-text);
+}
+
+/* ═══════════════════════════════════
+   HERO SECTION (Home Page)
+   ═══════════════════════════════════
+   Designed as a "title screen":
+   - Full viewport, centred content
+   - Subtle scanline texture (CSS only)
+   - Floating diamond particles for atmosphere
+   - Portrait framed like a character select
+   ═══════════════════════════════════ */
 .hero-section {
-  background-color: var(--background-section); /* Use variable */
-  min-height: calc(100vh - 60px); /* Adjust 60px based on your actual Header height, ensures it fills screen below header */
+  position: relative;
+  background-color: var(--rpg-bg);
+  min-height: 100vh;
   display: flex;
-  align-items: center; /* Vertically center content */
-  justify-content: center; /* Horizontally center content */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: var(--spacing-xxl) var(--spacing-lg);
-  overflow: hidden; /* Prevent potential overflow issues */
-  /* Remove the negative margin hack */
+  overflow: hidden;
+
+  /* Subtle scanline texture — matches about.css */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(200, 168, 78, 0.015) 2px,
+      rgba(200, 168, 78, 0.015) 4px
+    );
 }
 
+/* Ornamental lines (top & bottom of hero) */
+.hero-ornament {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--rpg-gold) 30%,
+    var(--rpg-gold) 70%,
+    transparent 100%
+  );
+  opacity: 0.4;
+}
+
+.hero-ornament-top {
+  top: 20px;
+}
+
+.hero-ornament-bottom {
+  bottom: 20px;
+}
+
+/* Floating particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  bottom: -20px;
+  color: var(--rpg-gold);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+/* Hero content layout */
 .hero-content {
   display: flex;
-  flex-direction: row; /* Text on left, image on right by default */
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between; /* Space out text and image */
-  gap: var(--spacing-xl); /* Gap between text and image */
+  justify-content: space-between;
+  gap: var(--spacing-xl);
   max-width: var(--container-max-width);
   width: 100%;
-  /* Add entry animation */
+  z-index: 1;
+
+  /* Entry animation */
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease forwards;
+  transform: translateY(24px);
+  animation: fadeInUp 1s 0.2s ease forwards;
 }
 
 @keyframes fadeInUp {
@@ -88,184 +185,213 @@ body {
   }
 }
 
+/* Hero text */
 .hero-text {
-  flex: 1 1 55%; /* Allow text to take slightly more space */
+  flex: 1 1 55%;
   text-align: left;
 }
 
-.hero-image-container {
-  flex: 1 1 40%; /* Image takes slightly less space */
-  text-align: center; /* Center image within its container */
-  /* Add subtle animation delay for image */
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s 0.2s ease forwards; /* Delay animation */
+.hero-pre {
+  font-size: 0.9rem;
+  color: var(--rpg-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  font-family: var(--rpg-font-heading);
 }
 
-/* Headings & Paragraphs specific to Hero */
+.hero-name {
+  font-family: var(--rpg-font-heading);
+  font-weight: 700;
+  font-size: clamp(3rem, 7vw, 5rem);
+  color: var(--rpg-gold);
+  letter-spacing: 0.06em;
+  display: block;
+  line-height: 1.1;
+}
+
 .hero-section h1 {
-  font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-md);
-  color: var(--text-dark);
-  line-height: 1.2;
+  margin: 0 0 8px;
 }
 
-.hero-section p {
-  font-size: clamp(1rem, 2.5vw, 1.25rem); /* Responsive font size */
-  max-width: 650px; /* Keep paragraph readable */
-  margin-bottom: 0; /* Remove default bottom margin if not needed */
-  color: var(--text-medium);
+.hero-class {
+  font-size: 1.05rem;
+  color: var(--rpg-muted);
+  letter-spacing: 0.08em;
+  margin: 0 0 24px;
 }
 
-.highlight-text {
-  font-weight: var(--font-weight-semibold);
-  color: var(--primary-color); /* Use primary color for emphasis */
-  /* Optional: add subtle background */
-  /* background-color: var(--highlight-bg); */
-  /* padding: 0 var(--spacing-xs); */
+.hero-divider {
+  width: 80px;
+  height: 1px;
+  background: var(--rpg-gold);
+  opacity: 0.35;
+  margin-bottom: 24px;
 }
 
-/* Profile Image */
-.profile-image {
-  /* Consolidate all profile image styles here */
-  display: inline-block; /* Allows centering via text-align on parent */
-  width: clamp(180px, 40vw, 320px); /* Responsive width */
-  height: auto; /* Maintain aspect ratio */
-  aspect-ratio: 1 / 1; /* Ensure it's perfectly round */
-  object-fit: cover; /* Prevent distortion */
-  border-radius: 50%;
-  border: 4px solid var(--image-border-color);
-  box-shadow: 0 8px 25px var(--shadow-color); /* Softer shadow */
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+.hero-desc {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: var(--rpg-muted);
+  max-width: 580px;
+  line-height: 1.8;
+  margin: 0 0 32px;
 }
 
-.profile-image:hover {
-  transform: scale(1.03) rotate(2deg); /* Subtle hover effect */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* Call to Action Links (Example) */
-.cta-link {
-  color: var(--primary-color);
+/* CTA button — styled as an RPG action prompt */
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--rpg-font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rpg-gold);
+  border: 1px solid rgba(200, 168, 78, 0.35);
+  padding: 14px 32px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
   text-decoration: none;
-  font-weight: var(--font-weight-semibold);
-  border-bottom: 2px solid transparent;
-  transition: border-color var(--transition-speed) ease;
 }
 
-.cta-link:hover {
-  border-color: var(--primary-color);
+.hero-cta:hover {
+  background: rgba(200, 168, 78, 0.08);
+  border-color: var(--rpg-gold);
+  color: var(--rpg-text);
 }
 
-/* --- Media Queries --- */
+.cta-diamond {
+  font-size: 0.7rem;
+  color: var(--rpg-gold);
+}
+
+/* Portrait — character select frame */
+.hero-portrait-wrap {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  /* Stagger animation */
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeInUp 1s 0.5s ease forwards;
+}
+
+.hero-portrait-frame {
+  width: clamp(200px, 30vw, 300px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(200, 168, 78, 0.3);
+  position: relative;
+}
+
+.hero-portrait-frame::after {
+  /* Corner accent — top-left and bottom-right gold ticks */
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-top-color: var(--rpg-gold);
+  border-left-color: var(--rpg-gold);
+  clip-path: polygon(0 0, 30px 0, 0 30px);
+  pointer-events: none;
+}
+
+.hero-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.1) saturate(0.85);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.hero-portrait:hover {
+  filter: sepia(0) saturate(1);
+  transform: scale(1.03);
+}
+
+.hero-portrait-label {
+  font-size: 0.8rem;
+  color: var(--rpg-gold-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: var(--rpg-font-heading);
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
 @media (max-width: 768px) {
-  body {
-    font-size: 16px; /* Prevent zoom on iOS */
-  }
-
   .hero-section {
-    min-height: calc(100vh - 50px); /* Adjust for potentially smaller header */
+    min-height: 100vh;
     padding: var(--spacing-xl) var(--spacing-md);
-    text-align: center; /* Center text on mobile */
+    text-align: center;
   }
 
   .hero-content {
-    flex-direction: column; /* Stack text and image */
+    flex-direction: column;
     gap: var(--spacing-xl);
   }
 
   .hero-text {
-    flex-basis: auto; /* Reset flex basis */
-    text-align: center; /* Center text block */
-    order: 2; /* Put text below image */
+    text-align: center;
+    order: 2;
   }
 
-  .hero-image-container {
-    flex-basis: auto;
-    order: 1; /* Put image above text */
-    width: 60%; /* Adjust image container width */
-    margin: 0 auto; /* Center the container */
-    animation-delay: 0s; /* Remove animation delay on mobile if preferred */
+  .hero-portrait-wrap {
+    order: 1;
   }
 
-  .profile-image {
-     width: 100%; /* Image fills its container */
-     max-width: 250px; /* Limit max size on mobile */
+  .hero-portrait-frame {
+    width: clamp(180px, 50vw, 240px);
   }
 
-  .hero-section h1 {
-      /* Adjusted clamp for mobile */
-      font-size: clamp(2rem, 8vw, 2.8rem);
+  .hero-divider {
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .hero-section p {
-       /* Adjusted clamp for mobile */
-      font-size: clamp(1rem, 4vw, 1.1rem);
-      max-width: 100%; /* Allow paragraph to take full width */
+  .hero-desc {
+    max-width: 100%;
+  }
+
+  .hero-cta {
+    margin: 0 auto;
   }
 }
 
-/* Extra small mobile devices */
 @media (max-width: 480px) {
-  :root {
-    --spacing-md: 12px;
-    --spacing-lg: 20px;
-    --spacing-xl: 24px;
+  .hero-pre {
+    font-size: 0.75rem;
   }
 
-  body {
-    font-size: 15px;
-    line-height: 1.6;
+  .hero-class {
+    font-size: 0.9rem;
   }
 
-  .hero-section {
-    padding: var(--spacing-lg) var(--spacing-md);
-    min-height: calc(100vh - 40px);
+  .hero-desc {
+    font-size: 0.95rem;
   }
 
-  .hero-section h1 {
-    font-size: clamp(1.8rem, 10vw, 2.5rem);
-  }
-
-  .hero-section p {
-    font-size: clamp(0.95rem, 5vw, 1.1rem);
-  }
-
-  .hero-image-container {
-    width: 70%;
-  }
-
-  .profile-image {
-    max-width: 200px;
+  .hero-cta {
+    padding: 12px 24px;
+    font-size: 0.85rem;
   }
 }
 
-/* Touch device optimizations */
+/* Touch devices — remove hover transforms */
 @media (hover: none) and (pointer: coarse) {
-  /* Remove hover effects on touch devices */
-  a:hover {
-    text-decoration: none;
-  }
-
-  .filter-btn:hover {
+  .hero-portrait:hover {
+    filter: sepia(0.1) saturate(0.85);
     transform: none;
   }
 
-  .project-card:hover {
-    transform: none;
+  .hero-cta:hover {
+    background: transparent;
+    border-color: rgba(200, 168, 78, 0.35);
+    color: var(--rpg-gold);
   }
-}
-
-/* --- Other Global Styles (Links, Buttons, etc. if needed) --- */
-/* Example: General link styling */
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color var(--transition-speed) ease;
-}
-
-a:hover {
-  color: var(--secondary-color);
-  text-decoration: underline;
 }

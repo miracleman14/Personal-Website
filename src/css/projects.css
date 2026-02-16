@@ -1,447 +1,461 @@
-/* --- CSS Variables --- */
-:root {
-  --primary-color: #4a69bd; /* A nice blue */
-  --secondary-color: #6a89cc;
-  --text-color-dark: #333;
-  --text-color-light: #555;
-  --text-color-inverted: #fff;
-  --background-light: #f0f4ff; /* Light blue/grey background */
-  --card-background: #ffffff;
-  --border-color: #e0e0e0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --shadow-color-hover: rgba(0, 0, 0, 0.15);
-  --tag-background: #eef2f7;
-  --tag-text: #5a67d8; /* Indigo-like color for tags */
-  --link-hover-bg: #f5f5f5;
+/* ═══════════════════════════════════════════════════
+   PROJECTS — RPG "Armoury" Theme
+   ═══════════════════════════════════════════════════
+   Same palette & tokens as App.css / about.css.
+   Cards are styled as inventory item cards:
+   - Gold rarity stripe at top
+   - Image = item illustration
+   - Title in Cinzel gold
+   - Description = lore text (muted)
+   - Tech tags = enchantment chips (gold-bordered)
+   - Links = action buttons with diamond markers
+   ═══════════════════════════════════════════════════ */
 
-  --spacing-small: 8px;
-  --spacing-medium: 16px;
-  --spacing-large: 24px;
-  --spacing-xlarge: 32px;
-
-  --border-radius: 8px;
-  --transition-speed: 0.3s;
+/* ── Section ── */
+.armoury-section {
+  background-color: var(--rpg-bg, #0e0e1a);
+  min-height: 100vh;
+  padding: 100px 24px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--rpg-text, #d4d0c8);
+  font-family: var(--rpg-font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  /* Scanline texture */
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(200, 168, 78, 0.015) 2px,
+      rgba(200, 168, 78, 0.015) 4px
+    );
 }
 
-/* --- General Styles --- */
-body {
-  background-color: var(--background-light);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
-  color: var(--text-color-dark);
-  line-height: 1.6;
-}
-
-/* --- Section Styles --- */
-.projects-section {
-  padding: var(--spacing-xlarge) var(--spacing-medium);
-  max-width: 1200px; /* Limit max width for better readability */
-  margin: 80px auto 40px auto; /* Keep top margin, add auto horizontal margins */
-}
-
-.section-title {
-  font-size: 2.5rem; /* Slightly larger, responsive units */
+/* ── Header ── */
+.armoury-header {
   text-align: center;
-  color: var(--text-color-dark);
-  font-weight: 600;
-  margin-bottom: var(--spacing-xlarge);
-  position: relative; /* For potential pseudo-element decoration */
+  margin-bottom: 40px;
+  position: relative;
 }
 
-/* Filter Styles */
-.filter-container {
+.armoury-header .ornament-top {
+  position: relative;
+  left: auto;
+  right: auto;
+  width: 60%;
+  margin: 0 auto 24px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--rpg-gold, #c8a84e) 30%,
+    var(--rpg-gold, #c8a84e) 70%,
+    transparent 100%
+  );
+}
+
+/* Reuse heading styles from about.css */
+.armoury-section .rpg-heading {
+  font-family: var(--rpg-font-heading, 'Cinzel', serif);
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--rpg-gold, #c8a84e);
   text-align: center;
-  margin-bottom: var(--spacing-xlarge);
+  margin: 0 0 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.filter-buttons {
+.armoury-section .rpg-subtext {
+  text-align: center;
+  color: var(--rpg-muted, #8a8878);
+  font-size: 0.95rem;
+  margin: 0;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════
+   FILTER BAR — RPG class-select tabs
+   ═══════════════════════════════════ */
+.filter-bar {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--spacing-small);
-  margin-top: var(--spacing-medium);
+  gap: 8px;
+  margin-bottom: 40px;
 }
 
-.filter-btn {
-  background-color: var(--card-background);
-  border: 2px solid var(--border-color);
-  color: var(--text-color-light);
-  padding: 8px var(--spacing-medium);
-  border-radius: var(--border-radius);
+.filter-tab {
+  background: transparent;
+  border: 1px solid rgba(200, 168, 78, 0.2);
+  color: var(--rpg-muted, #8a8878);
+  padding: 10px 20px;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all var(--transition-speed) ease;
-  min-height: 44px; /* Ensure touch-friendly size */
-  display: flex;
+  font-family: var(--rpg-font-heading, 'Cinzel', serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
 }
 
-.filter-btn:hover {
-  background-color: var(--primary-color);
-  color: var(--text-color-inverted);
-  border-color: var(--primary-color);
+.filter-tab:hover {
+  border-color: var(--rpg-gold, #c8a84e);
+  color: var(--rpg-text, #d4d0c8);
+  background: rgba(200, 168, 78, 0.05);
 }
 
-.filter-btn.active {
-  background-color: var(--primary-color);
-  color: var(--text-color-inverted);
-  border-color: var(--primary-color);
+.filter-tab.active {
+  border-color: var(--rpg-gold, #c8a84e);
+  color: var(--rpg-gold, #c8a84e);
+  background: rgba(200, 168, 78, 0.08);
 }
 
-/* Optional: Add an underline accent to the title */
-.section-title::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--primary-color);
-    margin: var(--spacing-small) auto 0;
-    border-radius: 2px;
+.tab-diamond {
+  font-size: 0.55rem;
+  color: var(--rpg-gold, #c8a84e);
 }
 
-
-/* --- Grid Layout --- */
-.projects-grid {
+/* ═══════════════════════════════════
+   ITEM CARDS
+   ═══════════════════════════════════ */
+.armoury-grid {
   display: grid;
-  /* Responsive columns: min 300px wide, max 1fr */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-large);
-  justify-content: center; /* Center items if they don't fill the row */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
 }
 
-/* --- Project Card Styles --- */
-.project-card {
-  background-color: var(--card-background);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 12px var(--shadow-color);
-  overflow: hidden; /* Keep content contained */
+.item-card {
+  background: var(--rpg-panel, #16162a);
+  border: 1px solid rgba(200, 168, 78, 0.1);
   display: flex;
-  flex-direction: column; /* Stack image and content */
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px); /* Subtle lift */
-  box-shadow: 0 8px 20px var(--shadow-color-hover);
-}
-
-/* --- Project Image --- */
-.project-image-container {
-  position: relative; /* For overlay positioning */
+  flex-direction: column;
   overflow: hidden;
-  aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200, 168, 78, 0.3);
+}
+
+/* Rarity stripe — gold line at top of each card */
+.rarity-stripe {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--rpg-gold, #c8a84e) 20%,
+    var(--rpg-gold, #c8a84e) 80%,
+    transparent 100%
+  );
+}
+
+/* ── Item Image ── */
+.item-image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
   cursor: pointer;
 }
 
-.project-image {
+.item-image {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Cover the area without distortion */
-  transition: transform var(--transition-speed) ease;
+  object-fit: cover;
+  filter: sepia(0.08) saturate(0.9);
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.project-card:hover .project-image {
-  transform: scale(1.05); /* Slight zoom on hover */
+.item-card:hover .item-image {
+  transform: scale(1.04);
+  filter: sepia(0) saturate(1);
 }
 
-.project-image-overlay {
+.item-image-overlay {
   position: absolute;
-  inset: 0; /* Cover the entire container */
-  background-color: rgba(0, 0, 0, 0.5);
-  color: var(--text-color-inverted);
+  inset: 0;
+  background: rgba(14, 14, 26, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.1rem;
-  font-weight: 500;
   opacity: 0;
-  transition: opacity var(--transition-speed) ease;
-  pointer-events: none; /* Allow clicks to pass through unless hovered */
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.project-image-container:hover .project-image-overlay {
+.item-image-wrap:hover .item-image-overlay {
   opacity: 1;
-  pointer-events: auto; /* Make it clickable when visible */
+  pointer-events: auto;
 }
 
+.inspect-label {
+  font-family: var(--rpg-font-heading, 'Cinzel', serif);
+  font-size: 0.85rem;
+  color: var(--rpg-gold, #c8a84e);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
-/* --- Project Content --- */
-.project-content {
-  padding: var(--spacing-large);
-  flex-grow: 1; /* Allow content to fill remaining space */
+/* ── Item Content ── */
+.item-content {
+  padding: 24px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.project-title {
-  font-size: 1.5rem;
-  margin-bottom: var(--spacing-small);
-  color: var(--text-color-dark);
-  font-weight: 600;
+.item-title {
+  font-family: var(--rpg-font-heading, 'Cinzel', serif);
+  font-size: 1.2rem;
+  color: var(--rpg-gold, #c8a84e);
+  margin: 0 0 12px;
+  letter-spacing: 0.04em;
 }
 
-.project-description {
-  font-size: 0.95rem;
-  color: var(--text-color-light);
-  margin-bottom: var(--spacing-medium);
-  flex-grow: 1; /* Push technologies/links to bottom */
+.item-lore {
+  font-size: 0.9rem;
+  color: var(--rpg-muted, #8a8878);
+  line-height: 1.7;
+  margin: 0 0 20px;
+  flex-grow: 1;
 }
 
-/* --- Technologies / Tags --- */
-.project-technologies {
-  margin-bottom: var(--spacing-medium);
+/* ── Enchantments (tech tags) ── */
+.enchantments {
+  margin-bottom: 20px;
 }
 
-.tech-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-color-dark);
-    margin-bottom: var(--spacing-small);
+.enchant-label {
+  display: block;
+  font-family: var(--rpg-font-heading, 'Cinzel', serif);
+  font-size: 0.7rem;
+  color: var(--rpg-gold-dim, #8a7230);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-.tech-tags {
+.enchant-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-small);
+  gap: 6px;
 }
 
-.tech-tag {
-  background-color: var(--tag-background);
-  color: var(--tag-text);
-  padding: 4px var(--spacing-small);
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 500;
+.enchant-tag {
+  font-size: 0.75rem;
+  color: var(--rpg-gold, #c8a84e);
+  border: 1px solid rgba(200, 168, 78, 0.25);
+  padding: 3px 10px;
+  letter-spacing: 0.04em;
+  background: rgba(200, 168, 78, 0.04);
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
-/* --- Project Links --- */
-.project-links {
+.enchant-tag:hover {
+  border-color: var(--rpg-gold, #c8a84e);
+  background: rgba(200, 168, 78, 0.1);
+}
+
+/* ── Action Links ── */
+.item-actions {
   display: flex;
-  gap: var(--spacing-medium);
-  margin-top: auto; /* Push links to the bottom */
-  padding-top: var(--spacing-medium); /* Add space above links */
-  border-top: 1px solid var(--border-color); /* Separator line */
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(200, 168, 78, 0.08);
 }
 
-.project-link {
-  display: inline-flex; /* Align icon and text if using icons */
+.action-link {
+  display: inline-flex;
   align-items: center;
-  gap: var(--spacing-small); /* Space between icon and text */
-  padding: var(--spacing-small) var(--spacing-medium);
-  border-radius: var(--border-radius);
+  gap: 6px;
+  padding: 8px 16px;
+  font-family: var(--rpg-font-heading, 'Cinzel', serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-  border: 1px solid transparent;
+  color: var(--rpg-muted, #8a8878);
+  border: 1px solid rgba(200, 168, 78, 0.2);
+  background: transparent;
+  transition: all 0.3s ease;
+  min-height: 40px;
 }
 
-.project-link.github-link {
-  color: #333; /* GitHub-like color */
-  border-color: #ccc;
-}
-.project-link.github-link:hover {
-   background-color: #f5f5f5;
-   color: #000;
+.action-link:hover {
+  color: var(--rpg-gold, #c8a84e);
+  border-color: var(--rpg-gold, #c8a84e);
+  background: rgba(200, 168, 78, 0.06);
 }
 
-
-.project-link.live-link {
-  background-color: var(--primary-color);
-  color: var(--text-color-inverted);
-}
-.project-link.live-link:hover {
-  background-color: var(--secondary-color);
-  color: var(--text-color-inverted);
+.action-link--primary {
+  color: var(--rpg-gold, #c8a84e);
+  border-color: rgba(200, 168, 78, 0.35);
 }
 
-/* --- Modal Styles --- */
-.modal-backdrop {
+.action-link--primary:hover {
+  background: rgba(200, 168, 78, 0.12);
+  color: var(--rpg-text, #d4d0c8);
+}
+
+/* ═══════════════════════════════════
+   INSPECT MODAL
+   ═══════════════════════════════════ */
+.inspect-backdrop {
   position: fixed;
-  z-index: 1000; /* Ensure it's on top */
+  z-index: 1000;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8); /* Darker backdrop */
+  background: rgba(10, 10, 20, 0.88);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-large);
-  cursor: pointer; /* Indicate backdrop is clickable to close */
-  animation: fadeIn 0.3s ease; /* Fade in animation */
+  padding: 24px;
+  cursor: pointer;
+  animation: fadeIn 0.25s ease;
 }
 
-.modal-content-wrapper {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    cursor: default; /* Don't show close cursor on the content itself */
-    animation: scaleUp 0.3s ease; /* Scale up animation */
+.inspect-frame {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  cursor: default;
+  border: 1px solid rgba(200, 168, 78, 0.25);
+  animation: scaleUp 0.3s ease;
+  /* Ensure the close button can overflow outside the frame */
+  overflow: visible;
 }
 
-.modal-image {
-  display: block; /* Remove extra space below image */
+.inspect-image {
+  display: block;
   max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Ensure whole image is visible */
-  border-radius: 4px; /* Slight rounding */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-height: 85vh;
+  object-fit: contain;
 }
 
-.modal-close-button {
+.inspect-close {
   position: absolute;
-  top: -10px; /* Position slightly outside */
-  right: -10px;
-  background-color: var(--text-color-dark);
-  color: var(--text-color-inverted);
-  border: none;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 24px;
-  line-height: 35px; /* Center the 'x' */
+  top: 8px;
+  right: 8px;
+  background: var(--rpg-panel, #16162a);
+  color: var(--rpg-gold, #c8a84e);
+  border: 1px solid rgba(200, 168, 78, 0.3);
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  line-height: 34px;
   text-align: center;
   cursor: pointer;
-  z-index: 1001; /* Above the image */
-  transition: background-color var(--transition-speed) ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1001;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.modal-close-button:hover {
-  background-color: #555;
+.inspect-close:hover {
+  background: var(--rpg-gold, #c8a84e);
+  color: var(--rpg-bg, #0e0e1a);
 }
 
-
-/* Keyframe animations for modal */
+/* Keyframes */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
 @keyframes scaleUp {
-  from { transform: scale(0.9); opacity: 0; }
+  from { transform: scale(0.92); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
-
-/* --- Media Queries for Responsiveness --- */
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
 @media (max-width: 768px) {
-  .projects-section {
-    padding: var(--spacing-large) var(--spacing-medium);
+  .armoury-section {
+    padding: 80px 16px 40px;
   }
 
-  .section-title {
-    font-size: 2rem;
+  .armoury-section .rpg-heading {
+    font-size: 1.8rem;
   }
 
-  .filter-buttons {
-    gap: var(--spacing-small);
+  .armoury-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .filter-bar {
+    gap: 6px;
+  }
+
+  .filter-tab {
+    padding: 8px 14px;
+    font-size: 0.72rem;
+    flex: 1 1 auto;
+    max-width: 130px;
     justify-content: center;
   }
 
-  .filter-btn {
-    padding: 10px var(--spacing-small);
+  .item-content {
+    padding: 16px;
+  }
+
+  .item-title {
+    font-size: 1.05rem;
+  }
+
+  .item-lore {
     font-size: 0.85rem;
-    min-width: 80px;
-    flex: 1 1 auto;
-    max-width: 120px;
   }
 
-  .projects-grid {
-    /* Stack to single column on smaller screens */
-    grid-template-columns: 1fr;
-    gap: var(--spacing-large);
+  .item-actions {
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .project-content {
-    padding: var(--spacing-medium);
+  .action-link {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
   }
 
-  .project-title {
-      font-size: 1.3rem;
-  }
-  .project-description {
-      font-size: 0.9rem;
-  }
-  .project-links {
-      flex-direction: column; /* Stack links vertically */
-      align-items: flex-start; /* Align links to the start */
-      gap: var(--spacing-medium);
-  }
-  .project-link {
-      width: 100%; /* Make links full width */
-      text-align: center; /* Center text in links */
-      justify-content: center; /* Center icon/text */
-      min-height: 44px; /* Touch-friendly */
+  .inspect-frame {
+    max-width: 95%;
+    max-height: 85%;
   }
 
-  .modal-content-wrapper {
-      max-width: 95%;
-      max-height: 85%;
-  }
-  .modal-close-button {
-      top: 5px;
-      right: 5px;
-      width: 35px;
-      height: 35px;
-      font-size: 20px;
-      line-height: 35px;
+  .inspect-close {
+    top: 4px;
+    right: 4px;
   }
 }
 
 @media (max-width: 480px) {
-    .projects-section {
-      padding: var(--spacing-medium) var(--spacing-small);
-    }
+  .armoury-section {
+    padding: 70px 12px 32px;
+  }
 
-    .section-title {
-      font-size: 1.8rem;
-      margin-bottom: var(--spacing-large);
-    }
+  .armoury-section .rpg-heading {
+    font-size: 1.5rem;
+  }
 
-    .filter-container {
-      margin-bottom: var(--spacing-large);
-    }
+  .filter-tab {
+    padding: 6px 10px;
+    font-size: 0.68rem;
+    min-width: 60px;
+  }
 
-    .filter-buttons {
-      gap: 8px;
-    }
+  .item-title {
+    font-size: 0.95rem;
+  }
 
-    .filter-btn {
-      padding: 8px 6px;
-      font-size: 0.8rem;
-      min-width: 70px;
-      max-width: 100px;
-    }
-
-    .project-card {
-      margin: 0 var(--spacing-small);
-    }
-
-    .project-content {
-      padding: var(--spacing-small);
-    }
-
-    .project-title {
-      font-size: 1.2rem;
-    }
-
-    .project-description {
-      font-size: 0.85rem;
-    }
-
-    .tech-tags {
-      gap: 6px;
-    }
-
-    .tech-tag {
-      font-size: 0.75rem;
-      padding: 3px 6px;
-    }
-
-    .modal-content-wrapper {
-      max-width: 98%;
-      max-height: 90%;
-    }
+  .enchant-tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+  }
 }
