@@ -100,7 +100,7 @@ function About() {
             <div className="sheet-info">
               <div className="stat-line">
                 <span className="stat-label">Class</span>
-                <span className="stat-value">Technical Artist / Cloud Engineer</span>
+                <span className="stat-value">Product Designer / Technical UI/UX</span>
               </div>
               <div className="stat-line">
                 <span className="stat-label">Race</span>
@@ -114,9 +114,9 @@ function About() {
               <div className="trait-divider" />
 
               <p className="sheet-flavour">
-                Sports enthusiast with a strong interest in technical art, cloud,
-                and game development. Specialises in <em>problem solving</em> —
-                improves performance and usability without sacrificing creativity.
+                Design-focused builder who translates complex systems into intuitive
+                interfaces. Specialises in <em>problem solving</em> through user journeys,
+                rapid prototyping, and accessible interaction design.
               </p>
             </div>
 
@@ -174,25 +174,24 @@ function About() {
         <div className="rpg-panel rpg-reveal">
           <div className="ornament-top" />
           <h2 className="rpg-heading">Skill Tree</h2>
-          <p className="rpg-subtext">Bridging creative ambition and technical reality.</p>
+          <p className="rpg-subtext">Design-first thinking, backed by engineering depth.</p>
 
           <div className="skill-branches">
             <div className="skill-branch">
-              <h3 className="branch-name">☁ Cloud &amp; Infrastructure</h3>
-              <SkillBar name="Azure & DevOps" level={70} />
-              <SkillBar name="Docker & Containers" level={60} />
-              <SkillBar name="CI/CD Pipelines" level={55} />
-              <SkillBar name="Terraform (IaC)" level={50} />
-              <SkillBar name="Bash & PowerShell" level={65} />
+              <h3 className="branch-name">✦ Design &amp; UI/UX</h3>
+              <SkillBar name="Figma" level={100} />
+              <SkillBar name="Wireframing" level={98} />
+              <SkillBar name="Rapid Prototyping" level={96} />
+              <SkillBar name="User Journey Mapping" level={95} />
             </div>
 
             <div className="skill-branch">
-              <h3 className="branch-name">✦ Creative &amp; Systems</h3>
-              <SkillBar name="C++ (Systems)" level={55} />
-              <SkillBar name="Python (Automation)" level={85} />
-              <SkillBar name="Three.js (3D Web)" level={60} />
-              <SkillBar name="React.js" level={70} />
-              <SkillBar name="Real-time Rendering" level={55} />
+              <h3 className="branch-name">⚙ Frontend &amp; Engineering</h3>
+              <SkillBar name="React.js" level={78} />
+              <SkillBar name="Python (Automation)" level={74} />
+              <SkillBar name="C++ (Systems)" level={68} />
+              <SkillBar name="JavaScript" level={72} />
+              <SkillBar name="Three.js (3D Web)" level={66} />
             </div>
 
             <div className="skill-branch">

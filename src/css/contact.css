@@ -77,6 +77,33 @@
   text-transform: uppercase;
 }
 
+.direct-contact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0 0 28px;
+}
+
+.primary-contact {
+  display: block;
+  padding: 12px 14px;
+  border: 1px solid rgba(200, 168, 78, 0.42);
+  background: rgba(200, 168, 78, 0.08);
+  color: var(--rpg-gold, #c8a84e);
+  font-family: var(--rpg-font-heading, 'Cinzel', serif);
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.primary-contact:hover {
+  background: rgba(200, 168, 78, 0.14);
+  border-color: var(--rpg-gold, #c8a84e);
+  color: var(--rpg-text, #d4d0c8);
+}
+
 /* ═══════════════════════════════════
    FORM
    ═══════════════════════════════════ */
@@ -259,6 +286,12 @@
     min-height: 48px;
   }
 
+  .primary-contact {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    word-break: break-word;
+  }
+
   .scroll-sent-toast {
     bottom: 12px;
     right: 12px;
@@ -284,5 +317,10 @@
   .social-links img {
     width: 36px;
     height: 36px;
+  }
+
+  .direct-contact {
+    gap: 10px;
+    margin-bottom: 24px;
   }
 }

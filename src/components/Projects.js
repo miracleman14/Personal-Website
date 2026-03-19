@@ -54,19 +54,44 @@ function Projects() {
     id: 'moss-solar-system',
     title: 'Model of the Solar System (MOSS)',
     description:
-      'A 3D solar system simulation built with Flask and React.js that models planetary orbits using real-time physics calculations. Features interactive controls, Newtonian mechanics, and real-world astronomical data from JPL. Includes WebSocket communication for real-time updates.',
+      'An interactive, visually engaging React frontend designed to visualise complex, real-time astronomical data, focusing on smooth user navigation and accessible data presentation.',
     imageName: 'MOSS1.png',
     technologies: [
-      'Python', 'Flask', 'React.js', 'Three.js', 'Flask-SocketIO',
-      'WebSockets', 'Skyfield', 'JPL Horizons API',
-      'N-Body Simulation', 'Velocity Verlet Integration',
+      'React.js', 'Three.js', 'Data Visualisation', 'Interactive UI', 'Responsive Design',
     ],
     githubUrl: 'https://github.com/miracleman14/Model-of-the-Solar-System-MOSS-',
     liveUrl: null,
     category: 'Web Development',
   };
 
-  const allProjects = [mossProject, ...projectsData];
+  const sentimentProject = {
+    id: 'opinionise-platform',
+    title: 'Game Review Sentiment Platform',
+    description:
+      'A mobile-optimised web application designed to solve gamer information overload. Aggregates fragmented review data (Steam, Metacritic, Reddit) into a single, intuitive user-facing score.',
+    technologies: ['React.js', 'UI/UX Design', 'Mobile-first Design', 'Data Visualisation'],
+    imageName: 'Opinionise.jpg',
+    githubUrl: null,
+    liveUrl: 'https://opinionise.vercel.app/',
+    category: 'Web Development',
+  };
+
+  const demotedIds = ['sinclairs-secrets', 'fittech-website'];
+  const cardiffProject = projectsData.find((project) => project.id === 'cardiff-scavenger-hunt');
+  const remainingProjects = projectsData.filter(
+    (project) => project.id !== 'cardiff-scavenger-hunt' && !demotedIds.includes(project.id)
+  );
+  const demotedProjects = demotedIds
+    .map((id) => projectsData.find((project) => project.id === id))
+    .filter(Boolean);
+
+  const allProjects = [
+    sentimentProject,
+    ...(cardiffProject ? [cardiffProject] : []),
+    mossProject,
+    ...remainingProjects,
+    ...demotedProjects,
+  ];
 
   const filterOptions = ['All', 'Python', 'JavaScript', 'Java', 'C#', 'Web Development'];
 
@@ -98,7 +123,7 @@ function Projects() {
       <div className="armoury-header">
         <div className="ornament-top" />
         <h2 className="rpg-heading">The Armoury</h2>
-        <p className="rpg-subtext">Crafted works &amp; completed commissions</p>
+        <p className="rpg-subtext">UI/UX Case Studies &amp; Technical Projects</p>
       </div>
 
       {/* ── Filter tabs ── */}

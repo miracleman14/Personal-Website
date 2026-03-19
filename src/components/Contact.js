@@ -67,7 +67,26 @@ function Contact({ addMessage }) {
         <div className="ornament-top" />
 
         <h2 className="rpg-heading">The Courier</h2>
-        <p className="rpg-subtext">Send a scroll</p>
+        <p className="rpg-subtext">Send a Message</p>
+
+        <div className="direct-contact" aria-label="Primary contact links">
+          <a
+            href="mailto:miraclerates@gmail.com"
+            className="primary-contact"
+            aria-label="Email Miracle directly"
+          >
+            Email: miraclerates@gmail.com
+          </a>
+          <a
+            href="https://www.linkedin.com/in/miracle-ndu-/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="primary-contact"
+            aria-label="Visit LinkedIn profile"
+          >
+            LinkedIn: miracle-ndu
+          </a>
+        </div>
 
         <form ref={form} onSubmit={sendEmail} className="courier-form">
           <div className="field-group">
@@ -112,7 +131,7 @@ function Contact({ addMessage }) {
           </div>
 
           <button type="submit" className="dispatch-btn">
-            <span className="btn-diamond">◆</span> Dispatch Scroll
+            <span className="btn-diamond">◆</span> Send Message
           </button>
         </form>
 
@@ -122,22 +141,22 @@ function Contact({ addMessage }) {
       {/* Success toast */}
       {showSuccessMessage && (
         <div className="scroll-sent-toast">
-          ◆ Scroll dispatched successfully!
+          ◆ Message sent successfully!
         </div>
       )}
 
       {/* Guild Connections */}
       <div className="guild-connections">
-        <p className="connections-label">Guild Connections</p>
+        <p className="connections-label">More Links</p>
         <div className="social-links">
+          <a href="https://www.linkedin.com/in/miracle-ndu-/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <img src={`${process.env.PUBLIC_URL}/img/ig.png`} alt="LinkedIn" />
+          </a>
           <a href="https://github.com/miracleman14" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <img src={`${process.env.PUBLIC_URL}/img/git.png`} alt="GitHub" />
           </a>
           <a href="https://www.instagram.com/miraclendu59/?hl=en-gb" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <img src={`${process.env.PUBLIC_URL}/img/instagram-social-media-icon-design-template-vector-png_126996.png`} alt="Instagram" />
-          </a>
-          <a href="https://www.linkedin.com/in/miracle-ndu-/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <img src={`${process.env.PUBLIC_URL}/img/ig.png`} alt="LinkedIn" />
           </a>
         </div>
       </div>

@@ -50,18 +50,16 @@ function Home() {
             <span className="hero-name">Miracle</span>
           </h1>
           <p className="hero-class">
-            Technical Artist · Cloud Engineer · Game Developer
+            Product Designer · Technical UI/UX · Software Engineer
           </p>
 
           <div className="hero-divider" />
 
           <p className="hero-desc">
-            Final year <span className="gold">Computer Science MComp</span> undergraduate
-            at the University of Leicester. Passionate about the bigger picture of technology from
-            building, managing, and scaling solutions across{' '}
-            <span className="gold">Cloud Operations</span>,{' '}
-            <span className="gold">Game Development</span>, and{' '}
-            <span className="gold">Digital Strategy</span>.
+            Final-year MComp Computer Science student blending a strong understanding of
+            systems architecture with a passion for human-centric UI/UX design. Highly
+            skilled at translating complex technical logic into intuitive, visually engaging
+            digital interfaces.
           </p>
 
           <a href={`${process.env.PUBLIC_URL}/about`} className="hero-cta">
